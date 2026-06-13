@@ -1,98 +1,251 @@
+"use client";
+
+import Link from "next/link";
+
 import {
-  FaFacebookF,
-  FaInstagram,
-  FaTwitter,
-  FaYoutube,
-} from "react-icons/fa";
+  ShoppingBag,
+  Heart,
+  Star,
+  Send,
+} from "lucide-react";
 
 export default function Footer() {
+
   return (
-    <footer className="bg-black text-white px-16 py-20 border-t border-gray-800">
+    <footer className="w-full bg-[#050507] text-white border-t border-white/10">
 
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
+      <div className="container-main py-16 md:py-20">
 
-        {/* BRAND */}
-        <div>
+        {/* TOP */}
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-14">
 
-          <h1 className="text-4xl font-extrabold bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 text-transparent bg-clip-text">
-            NovaMart
-          </h1>
+          {/* BRAND */}
+          <div>
 
-          <p className="text-gray-400 mt-6 leading-7">
-            Futuristic AI-powered shopping experience built for modern lifestyles.
+            <div className="flex items-center gap-3">
+
+              <div className="w-14 h-14 rounded-3xl bg-gradient-to-r from-pink-500 to-purple-500 flex items-center justify-center text-2xl font-bold">
+
+                N
+
+              </div>
+
+              <div>
+
+                <h1 className="text-3xl font-bold">
+
+                  NovaMart
+
+                </h1>
+
+                <p className="text-gray-400 text-sm mt-1">
+
+                  Smart Shopping
+
+                </p>
+
+              </div>
+
+            </div>
+
+            <p className="text-gray-400 leading-8 mt-8 max-w-sm">
+
+              NovaMart is a futuristic eCommerce experience designed for modern shoppers with AI-powered recommendations and premium collections.
+
+            </p>
+
+            {/* SOCIAL */}
+            <div className="flex items-center gap-4 mt-10">
+
+              <button className="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center hover:bg-pink-500/20 transition">
+
+                <ShoppingBag />
+
+              </button>
+
+              <button className="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center hover:bg-pink-500/20 transition">
+
+                <Heart />
+
+              </button>
+
+              <button className="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center hover:bg-pink-500/20 transition">
+
+                <Star />
+
+              </button>
+
+              <button className="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center hover:bg-pink-500/20 transition">
+
+                <ShoppingBag />
+
+              </button>
+
+            </div>
+
+          </div>
+
+          {/* QUICK LINKS */}
+          <div>
+
+            <h2 className="text-2xl font-bold">
+
+              Quick Links
+
+            </h2>
+
+            <div className="flex flex-col gap-5 mt-8 text-gray-400">
+
+              <Link
+                href="/"
+                className="hover:text-pink-500 transition"
+              >
+                Home
+              </Link>
+
+              <Link
+                href="/shop"
+                className="hover:text-pink-500 transition"
+              >
+                Shop
+              </Link>
+
+              <Link
+                href="/cart"
+                className="hover:text-pink-500 transition"
+              >
+                Cart
+              </Link>
+
+              <Link
+                href="/wishlist"
+                className="hover:text-pink-500 transition"
+              >
+                Wishlist
+              </Link>
+
+              <Link
+                href="/orders"
+                className="hover:text-pink-500 transition"
+              >
+                Orders
+              </Link>
+
+            </div>
+
+          </div>
+
+          {/* SUPPORT */}
+          <div>
+
+            <h2 className="text-2xl font-bold">
+
+              Support
+
+            </h2>
+
+            <div className="flex flex-col gap-5 mt-8 text-gray-400">
+
+              <button className="text-left hover:text-pink-500 transition">
+
+                Help Center
+
+              </button>
+
+              <button className="text-left hover:text-pink-500 transition">
+
+                Contact Us
+
+              </button>
+
+              <button className="text-left hover:text-pink-500 transition">
+
+                Privacy Policy
+
+              </button>
+
+              <button className="text-left hover:text-pink-500 transition">
+
+                Terms & Conditions
+
+              </button>
+
+            </div>
+
+          </div>
+
+          {/* NEWSLETTER */}
+          <div>
+
+            <h2 className="text-2xl font-bold">
+
+              Newsletter
+
+            </h2>
+
+            <p className="text-gray-400 leading-8 mt-8">
+
+              Subscribe to get updates about futuristic products and exclusive offers.
+
+            </p>
+
+            <div className="mt-8 flex items-center gap-3">
+
+              <div className="flex-1 h-14 bg-white/5 border border-white/10 rounded-2xl flex items-center px-5">
+
+                <input
+                  type="email"
+                  placeholder="Enter your email"
+                  className="bg-transparent outline-none w-full placeholder:text-gray-500"
+                />
+
+              </div>
+
+              <button className="w-14 h-14 rounded-2xl bg-gradient-to-r from-pink-500 to-purple-500 flex items-center justify-center hover:scale-105 transition">
+
+                <Send />
+
+              </button>
+
+            </div>
+
+          </div>
+
+        </div>
+
+        {/* BOTTOM */}
+        <div className="border-t border-white/10 mt-20 pt-8 flex flex-col lg:flex-row items-center justify-between gap-5">
+
+          <p className="text-gray-500">
+
+            © 2026 NovaMart. All rights reserved.
+
           </p>
 
-        </div>
+          <div className="flex items-center gap-8 text-gray-500">
 
-        {/* LINKS */}
-        <div>
+            <button className="hover:text-pink-500 transition">
 
-          <h2 className="text-2xl font-bold mb-6">
-            Quick Links
-          </h2>
+              Privacy
 
-          <div className="flex flex-col gap-4 text-gray-400">
-
-            <a href="#">Home</a>
-            <a href="#">Products</a>
-            <a href="#">Deals</a>
-            <a href="#">Categories</a>
-
-          </div>
-
-        </div>
-
-        {/* SUPPORT */}
-        <div>
-
-          <h2 className="text-2xl font-bold mb-6">
-            Support
-          </h2>
-
-          <div className="flex flex-col gap-4 text-gray-400">
-
-            <a href="#">Help Center</a>
-            <a href="#">Privacy Policy</a>
-            <a href="#">Terms & Conditions</a>
-            <a href="#">Contact Us</a>
-
-          </div>
-
-        </div>
-
-        {/* SOCIALS */}
-        <div>
-
-          <h2 className="text-2xl font-bold mb-6">
-            Follow Us
-          </h2>
-
-          <div className="flex gap-5">
-
-            <button className="bg-gray-900 p-4 rounded-full hover:bg-pink-500 transition">
-              <FaFacebookF />
             </button>
 
-            <button className="bg-gray-900 p-4 rounded-full hover:bg-pink-500 transition">
-              <FaInstagram />
+            <button className="hover:text-pink-500 transition">
+
+              Terms
+
             </button>
 
-            <button className="bg-gray-900 p-4 rounded-full hover:bg-pink-500 transition">
-              <FaTwitter />
-            </button>
+            <button className="hover:text-pink-500 transition">
 
-            <button className="bg-gray-900 p-4 rounded-full hover:bg-pink-500 transition">
-              <FaYoutube />
+              Security
+
             </button>
 
           </div>
 
         </div>
 
-      </div>
-
-      <div className="border-t border-gray-800 mt-16 pt-8 text-center text-gray-500">
-        © 2026 NovaMart. All rights reserved.
       </div>
 
     </footer>

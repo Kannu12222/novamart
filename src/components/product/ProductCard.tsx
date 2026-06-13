@@ -1,76 +1,86 @@
+"use client";
+
 import Link from "next/link";
-import { Heart, Star } from "lucide-react";
+import { Heart, ShoppingBag, Star } from "lucide-react";
+import toast from "react-hot-toast";
+import { useCartStore } from "@/store/cartStore";
+import { useWishlistStore } from "@/store/wishlistStore";
 
-export default function ProductCard() {
+type ProductCardProps = {
+  id: number;
+  title: string;
+  price: number;
+  image: string;
+  category?: string;
+  rating?: number;
+};
+
+const money = new Intl.NumberFormat("en-IN", {
+  style: "currency",
+  currency: "INR",
+  maximumFractionDigits: 0,
+});
+
+export default function ProductCard({
+  id,
+  title,
+  price,
+  image,
+  category = "Premium collection",
+  rating = 4.8,
+}: ProductCardProps) {
+  const addToCart = useCartStore((state) => state.addToCart);
+  const wishlistItems = useWishlistStore((state) => state.wishlistItems);
+  const addToWishlist = useWishlistStore((state) => state.addToWishlist);
+  const removeFromWishlist = useWishlistStore((state) => state.removeFromWishlist);
+  const saved = wishlistItems.some((item) => item.id === id);
+
+  function toggleWishlist() {
+    if (saved) {
+      removeFromWishlist(id);
+      toast.success("Removed from wishlist");
+    } else {
+      addToWishlist({ id, title, price, image });
+      toast.success("Saved to wishlist");
+    }
+  }
+
+  function addItem() {
+    addToCart({ id, title, price, image });
+    toast.success("Added to cart");
+  }
+
   return (
-  <Link href="/product/1">
-    <div className="group bg-gradient-to-b from-gray-900 to-black border border-gray-800 rounded-3xl overflow-hidden hover:scale-105 transition duration-300 shadow-2xl relative">
+    <article className="group flex h-full flex-col overflow-hidden rounded-[24px] border border-white/10 bg-white/[0.045] shadow-2xl shadow-black/10 hover:-translate-y-1 hover:border-white/20">
+      <Link href={`/product/${id}`} className="relative block aspect-[4/3] overflow-hidden bg-white/5">
+        <img src={image} alt={title} className="h-full w-full object-cover duration-500 group-hover:scale-[1.04]" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#08080b]/80 via-transparent to-transparent" />
+        <span className="absolute bottom-4 left-4 rounded-full border border-white/15 bg-black/45 px-3 py-1 text-xs font-medium text-gray-200 backdrop-blur-lg">{category}</span>
+      </Link>
 
-      {/* WISHLIST */}
-      <button className="absolute top-5 right-5 z-10 bg-black/50 p-2 rounded-full backdrop-blur-lg hover:bg-pink-500 transition">
-        <Heart size={18} />
-      </button>
-
-      {/* PRODUCT IMAGE */}
-      <div className="overflow-hidden">
-
-        <img
-          src="https://images.unsplash.com/photo-1542291026-7eec264c27ff"
-          alt="product"
-          className="w-full h-72 object-cover group-hover:scale-110 transition duration-500"
-        />
-
-      </div>
-
-      {/* CONTENT */}
-      <div className="p-6">
-
-        {/* CATEGORY */}
-        <span className="bg-pink-500/20 text-pink-400 px-4 py-1 rounded-full text-sm">
-          Trending
-        </span>
-
-        {/* TITLE */}
-        <h2 className="text-2xl font-bold text-white mt-4">
-          Premium Sneakers
-        </h2>
-
-        {/* DESCRIPTION */}
-        <p className="text-gray-400 mt-3">
-          Stylish futuristic sneakers for modern fashion lovers.
-        </p>
-
-        {/* RATING */}
-        <div className="flex items-center gap-1 mt-4 text-yellow-400">
-
-          <Star size={18} fill="currentColor" />
-          <Star size={18} fill="currentColor" />
-          <Star size={18} fill="currentColor" />
-          <Star size={18} fill="currentColor" />
-          <Star size={18} fill="currentColor" />
-
-          <span className="text-gray-400 ml-2">
-            (5.0)
-          </span>
-
+      <div className="flex flex-1 flex-col p-5 sm:p-6">
+        <div className="flex items-center gap-2 text-sm text-amber-400">
+          <Star size={15} fill="currentColor" />
+          <span className="font-semibold">{rating.toFixed(1)}</span>
+          <span className="text-gray-600">Verified</span>
         </div>
+        <Link href={`/product/${id}`} className="mt-3">
+          <h2 className="line-clamp-2 min-h-[3.25rem] text-xl font-bold leading-snug tracking-tight group-hover:text-pink-400">{title}</h2>
+        </Link>
+        <p className="mt-2 line-clamp-2 min-h-[3rem] text-sm text-gray-500">Curated quality, reliable delivery, and easy returns.</p>
 
-        {/* PRICE + BUTTON */}
-        <div className="flex items-center justify-between mt-6">
-
-          <h1 className="text-pink-500 text-3xl font-bold">
-            ₹2999
-          </h1>
-
-          <button className="bg-gradient-to-r from-pink-500 to-purple-500 px-5 py-2 rounded-full text-white font-semibold hover:scale-105 transition">
-            Add
-          </button>
-
+        <div className="mt-auto flex items-center justify-between gap-3 pt-6">
+          <span className="text-xl font-extrabold tracking-tight text-white">{money.format(price)}</span>
+          <div className="flex gap-2">
+            <button onClick={toggleWishlist} className={`grid h-10 w-10 place-items-center rounded-xl border ${saved ? "border-pink-500/40 bg-pink-500/15 text-pink-400" : "border-white/10 bg-white/5 text-gray-400 hover:text-white"}`} aria-label={saved ? "Remove from wishlist" : "Add to wishlist"}>
+              <Heart size={17} fill={saved ? "currentColor" : "none"} />
+            </button>
+            <button onClick={addItem} className="grid h-10 w-10 place-items-center rounded-xl bg-gradient-to-br from-pink-500 to-violet-600 shadow-lg shadow-pink-500/15 hover:scale-105" aria-label="Add to cart">
+              <ShoppingBag size={17} />
+            </button>
+          </div>
         </div>
-
       </div>
-
-    </div>
-  </Link>
-);
+    </article>
+  );
 }

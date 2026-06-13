@@ -1,87 +1,131 @@
+"use client";
+
+import Link from "next/link";
+
 import {
-  Smartphone,
-  Headphones,
+  Laptop,
   Shirt,
+  Headphones,
   Watch,
+  Gamepad2,
+  Smartphone,
 } from "lucide-react";
 
+const categories = [
+
+  {
+    title: "Electronics",
+    icon: Laptop,
+    color: "from-pink-500 to-purple-500",
+  },
+
+  {
+    title: "Fashion",
+    icon: Shirt,
+    color: "from-blue-500 to-cyan-500",
+  },
+
+  {
+    title: "Audio",
+    icon: Headphones,
+    color: "from-purple-500 to-indigo-500",
+  },
+
+  {
+    title: "Watches",
+    icon: Watch,
+    color: "from-orange-500 to-red-500",
+  },
+
+  {
+    title: "Gaming",
+    icon: Gamepad2,
+    color: "from-green-500 to-emerald-500",
+  },
+
+  {
+    title: "Mobiles",
+    icon: Smartphone,
+    color: "from-pink-500 to-rose-500",
+  },
+
+];
+
 export default function Categories() {
+
   return (
-    <section className="bg-black text-white px-16 py-20">
+    <section className="container-main">
 
-      {/* TITLE */}
-      <div className="mb-14">
+      <div>
 
-        <h1 className="text-5xl font-bold">
-          Shop By Categories
-        </h1>
+        {/* TOP */}
+        <div className="mb-10">
 
-        <p className="text-gray-400 mt-4 text-lg">
-          Explore premium collections curated for modern lifestyles.
-        </p>
+          <h2 className="text-3xl md:text-4xl font-black tracking-tight">
 
-      </div>
+            Shop By Category
 
-      {/* CATEGORY GRID */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-
-        {/* CARD 1 */}
-        <div className="bg-gradient-to-br from-pink-500/20 to-purple-500/20 border border-pink-500/20 rounded-3xl p-10 hover:scale-105 transition cursor-pointer">
-
-          <Smartphone size={50} className="text-pink-400" />
-
-          <h2 className="text-3xl font-bold mt-6">
-            Electronics
           </h2>
 
-          <p className="text-gray-400 mt-3">
-            Smartphones, gadgets & more.
+          <p className="text-gray-400 text-base md:text-lg mt-4 max-w-2xl">
+
+            Explore premium categories curated for futuristic shopping experiences.
+
           </p>
 
         </div>
 
-        {/* CARD 2 */}
-        <div className="bg-gradient-to-br from-blue-500/20 to-cyan-500/20 border border-blue-500/20 rounded-3xl p-10 hover:scale-105 transition cursor-pointer">
+        {/* GRID */}
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-5">
 
-          <Headphones size={50} className="text-blue-400" />
+          {
+            categories.map((category, index) => {
 
-          <h2 className="text-3xl font-bold mt-6">
-            Audio
-          </h2>
+              const Icon = category.icon;
 
-          <p className="text-gray-400 mt-3">
-            Premium sound experiences.
-          </p>
+              return (
 
-        </div>
+                <Link
+                  key={index}
+                  href={`/shop?category=${encodeURIComponent(category.title)}`}
+                  className="group relative min-h-44 overflow-hidden rounded-[22px] border border-white/10 bg-white/[0.045] p-5 hover:-translate-y-1 hover:border-white/20 cursor-pointer"
+                >
 
-        {/* CARD 3 */}
-        <div className="bg-gradient-to-br from-orange-500/20 to-yellow-500/20 border border-orange-500/20 rounded-3xl p-10 hover:scale-105 transition cursor-pointer">
+                  {/* GLOW */}
+                  <div
+                    className={`absolute inset-0 bg-gradient-to-br ${category.color} opacity-0 group-hover:opacity-20 transition duration-500`}
+                  ></div>
 
-          <Shirt size={50} className="text-orange-400" />
+                  {/* ICON */}
+                  <div
+                    className={`relative w-14 h-14 rounded-2xl bg-gradient-to-r ${category.color} flex items-center justify-center`}
+                  >
 
-          <h2 className="text-3xl font-bold mt-6">
-            Fashion
-          </h2>
+                    <Icon
+                      size={24}
+                      className="text-white"
+                    />
 
-          <p className="text-gray-400 mt-3">
-            Trending modern outfits.
-          </p>
+                  </div>
 
-        </div>
+                  {/* TEXT */}
+                  <h2 className="relative text-lg font-bold mt-6">
 
-        {/* CARD 4 */}
-        <div className="bg-gradient-to-br from-purple-500/20 to-pink-500/20 border border-purple-500/20 rounded-3xl p-10 hover:scale-105 transition cursor-pointer">
+                    {category.title}
 
-          <Watch size={50} className="text-purple-400" />
+                  </h2>
 
-          <h2 className="text-3xl font-bold mt-6">
-            Accessories
-          </h2>
+                  <p className="relative text-gray-400 text-sm mt-2">
 
-          <p className="text-gray-400 mt-3">
-            Watches, bags & essentials.
-          </p>
+                    Explore
+
+                  </p>
+
+                </Link>
+
+              );
+            })
+          }
 
         </div>
 

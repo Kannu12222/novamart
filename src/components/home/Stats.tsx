@@ -1,54 +1,72 @@
 export default function Stats() {
+
+  const stats = [
+
+    {
+      value: "10K+",
+      label: "Happy Customers",
+      color: "text-pink-500",
+      bg: "from-pink-500/20 to-purple-500/20",
+      border: "border-pink-500/20",
+    },
+
+    {
+      value: "5K+",
+      label: "Premium Products",
+      color: "text-blue-400",
+      bg: "from-blue-500/20 to-cyan-500/20",
+      border: "border-blue-500/20",
+    },
+
+    {
+      value: "24/7",
+      label: "AI Support",
+      color: "text-purple-400",
+      bg: "from-purple-500/20 to-pink-500/20",
+      border: "border-purple-500/20",
+    },
+
+    {
+      value: "Fast",
+      label: "Delivery System",
+      color: "text-orange-400",
+      bg: "from-orange-500/20 to-yellow-500/20",
+      border: "border-orange-500/20",
+    },
+
+  ];
+
   return (
-    <section className="bg-black text-white py-20 px-16">
+    <section className="w-full px-6 lg:px-10">
 
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+      <div className="max-w-[1400px] mx-auto">
 
-        <div className="bg-gradient-to-br from-pink-500/20 to-purple-500/20 border border-pink-500/20 rounded-3xl p-8 backdrop-blur-lg">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-5">
 
-          <h1 className="text-5xl font-bold text-pink-500">
-            10K+
-          </h1>
+          {
+            stats.map((item, index) => (
 
-          <p className="text-gray-300 mt-4 text-lg">
-            Happy Customers
-          </p>
+              <div
+                key={index}
+                className={`bg-gradient-to-br ${item.bg} border ${item.border} rounded-[28px] p-6 backdrop-blur-xl hover:translate-y-[-5px] transition duration-300`}
+              >
 
-        </div>
+                <h1 className={`text-3xl md:text-4xl font-black ${item.color}`}>
 
-        <div className="bg-gradient-to-br from-blue-500/20 to-cyan-500/20 border border-blue-500/20 rounded-3xl p-8">
+                  {item.value}
 
-          <h1 className="text-5xl font-bold text-blue-400">
-            5K+
-          </h1>
+                </h1>
 
-          <p className="text-gray-300 mt-4 text-lg">
-            Premium Products
-          </p>
+                <p className="text-gray-300 mt-3 text-sm md:text-base">
 
-        </div>
+                  {item.label}
 
-        <div className="bg-gradient-to-br from-purple-500/20 to-pink-500/20 border border-purple-500/20 rounded-3xl p-8">
+                </p>
 
-          <h1 className="text-5xl font-bold text-purple-400">
-            24/7
-          </h1>
+              </div>
 
-          <p className="text-gray-300 mt-4 text-lg">
-            AI Support
-          </p>
-
-        </div>
-
-        <div className="bg-gradient-to-br from-orange-500/20 to-yellow-500/20 border border-orange-500/20 rounded-3xl p-8">
-
-          <h1 className="text-5xl font-bold text-orange-400">
-            Fast
-          </h1>
-
-          <p className="text-gray-300 mt-4 text-lg">
-            Delivery System
-          </p>
+            ))
+          }
 
         </div>
 
